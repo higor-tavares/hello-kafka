@@ -1,0 +1,1 @@
+export KAFKA_HOME=/usr/local/kafka/bin
