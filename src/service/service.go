@@ -4,6 +4,7 @@ import (
 	"time"
 	"context"
 	"github.com/segmentio/kafka-go"
+	"log"
 )
 
 const (

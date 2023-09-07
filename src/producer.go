@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"github.com/higor-tavares/helo-kafka/src/utils"
-	"github.com/higor-tavares/helo-kafka/src/service"
+	"github.com/higor-tavares/hello-kafka/src/utils"
+	"github.com/higor-tavares/hello-kafka/src/service"
 )
 
 var (
@@ -28,7 +28,7 @@ func main() {
 }
 func ProduceMessage(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "POST" {
-		respondWith(w, http.StatusMethodNotAllowed, utils.Headers{
+		utils.RespondWith(w, http.StatusMethodNotAllowed, utils.Headers{
 			"Allow":"POST",
 		})
 		return
@@ -36,7 +36,7 @@ func ProduceMessage(w http.ResponseWriter, r *http.Request) {
 	msg := make([]byte, r.ContentLength, r.ContentLength)
 	r.Body.Read(msg)
 	message <- string(msg)
-	respondWith(w, http.StatusOK, nil)
+	utils.RespondWith(w, http.StatusOK, nil)
 }
 
 func sendMessage(messages <-chan string) {
