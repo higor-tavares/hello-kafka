@@ -61,7 +61,11 @@ func ProduceMessage(w http.ResponseWriter, r *http.Request) {
 
 func messageListener(messages <-chan string) {
 	for message := range messages {
-		service.SendToKafka(conn, message)
+		err := service.SendToKafka(conn, message)
+		if err != nil {
+			fmt.Printf("Error while sending the message %s to kafka: %s", message, err)
+		} else {
 		fmt.Printf("The message [%s] was sent successfuly\n", message)
+		}
 	}
 }

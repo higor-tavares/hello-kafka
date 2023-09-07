@@ -5,7 +5,6 @@ import (
 	"context"
 	"github.com/segmentio/kafka-go"
 	"os"
-	"fmt"
 )
 
 var (
@@ -17,7 +16,7 @@ func init(){
 
 func SetUp(topic string, partition int) (*kafka.Conn, error) {
 	conn, err := kafka.DialLeader(context.Background(), "tcp", brokerAddr, topic, partition)
-	conn.SetWriteDeadline(time.Now().Add(10*time.Second))
+	conn.SetWriteDeadline(time.Now().Add(60*time.Second))
 	return conn, err
 }
  
